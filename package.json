@@ -1,0 +1,41 @@
+{
+  "name": "react-auto-import",
+  "description": "Import all your routes, components, layouts, contexts, styles and images fully automatically",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Yuri",
+  "license": "MIT",
+  "scripts": {
+    "dev": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yuridv/react-auto-import.git"
+  },
+  "keywords": [
+    "node",
+    "react",
+    "vite",
+    "import",
+    "automatic",
+    "auto",
+    "routes",
+    "componentes",
+    "contexts",
+    "layouts",
+    "css",
+    "style",
+    "assets",
+    "images"
+  ],
+  "bugs": {
+    "url": "https://github.com/yuridv/react-auto-import/issues"
+  },
+  "homepage": "https://github.com/yuridv/react-auto-import",
+  "dependencies": {
+    "react-router-dom": "^7.1.5"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}
