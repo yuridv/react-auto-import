@@ -1,15 +1,15 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 
-let Files = import.meta.glob('../../../**');
-
-if (Object.keys(Files).find((f) => f.startsWith('../../../base-react/'))) {
+let Files = import.meta.glob('../../../../src/**');
+if (Object.keys(Files).length <= 0) {
+  Files = import.meta.glob('../../../src/**');
   for (let f in Files) {
-    if (f.startsWith('../../../base-react/')) Files[f.replace('base-react/', '')] = Files[f];
+    Files['../' + f] = Files[f]; 
     delete Files[f];
   }
 }
-
 console.log(Files)
+
 
 const routes = [ <Route key="*" path="*" element={ <Navigate to="/" /> } /> ];
 
