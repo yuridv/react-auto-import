@@ -1,7 +1,7 @@
 {
   "name": "react-auto-import2",
   "description": "Import all your routes, components, layouts, contexts, styles and images fully automatically",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "main": "index.js",
   "author": "Yuri",
   "license": "MIT",

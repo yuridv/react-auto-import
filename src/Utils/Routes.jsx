@@ -1,15 +1,12 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
 
-let Files = import.meta.glob('../../../../src/**');
-if (Object.keys(Files).length <= 0) {
-  Files = import.meta.glob('../../../src/**');
-  for (let f in Files) {
-    Files['../' + f] = Files[f]; 
-    delete Files[f];
-  }
-}
+let Files = import.meta.glob([
+  '../../../../**/*.{jsx,module.css,png,jpg,jpeg,gif,svg,webp,avif}',
+  '!../../../../node_modules/**', 
+  '!../../../../build/**', 
+  '!../../../../dist/**'
+]);
 console.log(Files)
-
 
 const routes = [ <Route key="*" path="*" element={ <Navigate to="/" /> } /> ];
 
