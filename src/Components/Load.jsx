@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 
-const Import = (props) => {
+const Load = (props) => {
   const [ Page, setPage ] = useState(false);
 
   useEffect(() => {
     (async () => {
-      let Component = (await props.element()).default;
+      let Element = (await props.element()).default;
       let Style = {};
 
       if (props.style) Style = await props.style();
-      if (!Style) console.warn('[Style]=> Not found:', props.element);
+      if (!Style) console.warn('[Load]=> Style not found for element:', props.element);
 
-      setPage(<Component { ...props } style={ Style } />);
+      setPage(<Element { ...props } style={ Style } />);
     })();
   }, [ props ]);
 
@@ -22,4 +22,4 @@ const Import = (props) => {
   )
 }
 
-export default Import;
+export default Load;

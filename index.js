@@ -1,9 +1,9 @@
-import { Config, Configuration } from './src/Config'
-import { Routes, Test } from './src/Utils'
+import { Config } from './src/Config'
+import { Routes } from './src/Utils'
+
+(() => Config())();
 
 export {
-  Routes,
   Config,
-  Configuration,
-  Test
-}
+  Routes
+};

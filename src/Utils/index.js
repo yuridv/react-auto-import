@@ -1,7 +1,5 @@
-import Routes from './Routes.jsx';
-import { Test } from './Test.jsx';
+import { Routes } from './Routes.jsx';
 
 export {
-  Routes,
-  Test
+  Routes
 }
