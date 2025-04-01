@@ -1,22 +1,8 @@
 import { Load as Routes } from './Utils/Routes'
+import config from '../defaultConfig.json'
 // import { Load as Layouts } from './Utils/Layouts'
 
 const Config = (newConfig = {}) => {
-  let config = {
-    Routes: {
-      dir: '/src/routes',
-      defaultPath: '/',
-      removeFromPath: [ 'default', 'public', 'private' ]
-    },
-    Layouts: {
-      dir: '/src/layouts/',
-      default: 'src/layouts/default.jsx',
-    },
-    Styles: {
-      dir: '/src/assets/css/'
-    }
-  }
-
   Object.keys(newConfig).forEach((key) => config[key] = { ...config[key], ...newConfig[key] });
 
   let layouts = config.Layouts || config.layouts;

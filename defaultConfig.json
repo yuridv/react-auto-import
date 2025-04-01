@@ -1,0 +1,14 @@
+{
+  "Routes": {
+    "dir": "/src/routes",
+    "defaultPath": "/",
+    "removeFromPath": [ "default", "public", "private" ]
+  },
+  "Layouts": {
+    "dir": "/src/layouts/",
+    "default": "src/layouts/default.jsx"
+  },
+  "Styles": {
+    "dir": "/src/assets/css/"
+  }
+}
