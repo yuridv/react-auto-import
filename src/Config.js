@@ -37,3 +37,5 @@ export {
   Config,
   Directory
 };
+
+Config();
