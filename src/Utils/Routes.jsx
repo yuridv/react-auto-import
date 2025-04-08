@@ -12,30 +12,52 @@ const Routes = {
 const Load = (config) => {
   const directory = Directory(config.dir);
 
-  const Result = [{ path: '*', element: <RedirectHome /> }];
+  let Result = {};
+  for (let filePath in directory.files) {
+    let parts = filePath
+      .toLowerCase()
+      .replace('../../../' + directory.path + '/', '')
+      .split('.')[0]
+      .split('/');
 
-  for (let f in directory.files) {
-    let path = f.toLowerCase().replace('../../../' + directory.path + '/', '').split('.')[0];
-    if (['main', 'index'].includes(path)) path = config.homePath;
+    let last = parts.pop();
 
-    if (path.split('/').pop() !== 'main') {
-      path = path.replace(new RegExp('^(' + config.removeFromPath?.join('|').toLocaleLowerCase() + ')/'), '');
+    for (let p of parts) {
+      // console.log(p);
     }
 
-    if (['main', 'index'].includes(path.split('/').slice(-1)[0])) {
-      path = path.split('/').slice(0, -1).join('/');
-    }
-
-    if (Result.find((r) => r.key === path)) {
-      console.error(`[Routes]=> There is already another route with the path equal to "/${path}"`);
-      continue;
-    }
-
-    Routes.list.push({ path });
-    Result.push({ path, element: <LoadComponent element={directory.files[f]} /> });
   }
 
-  Routes.router = createBrowserRouter(Result);
+  console.log(Result)
+
+
+
+
+  // const directory = Directory(config.dir);
+  // const Result = [{ path: '*', element: <RedirectHome /> }];
+
+  // for (let f in directory.files) {
+  //   let path = f.toLowerCase().replace('../../../' + directory.path + '/', '').split('.')[0];
+  //   if (['main', 'index'].includes(path)) path = config.homePath;
+
+  //   if (path.split('/').pop() !== 'main') {
+  //     path = path.replace(new RegExp('^(' + config.removeFromPath?.join('|').toLocaleLowerCase() + ')/'), '');
+  //   }
+
+  //   if (['main', 'index'].includes(path.split('/').slice(-1)[0])) {
+  //     path = path.split('/').slice(0, -1).join('/');
+  //   }
+
+  //   if (Result.find((r) => r.key === path)) {
+  //     console.error(`[Routes]=> There is already another route with the path equal to "/${path}"`);
+  //     continue;
+  //   }
+
+  //   Routes.list.push({ path });
+  //   Result.push({ path, element: <LoadComponent element={directory.files[f]} /> });
+  // }
+
+  // Routes.router = createBrowserRouter(Result);
 };
 
 export {
