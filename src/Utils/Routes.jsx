@@ -2,62 +2,57 @@ import { createBrowserRouter } from 'react-router-dom';
 import { Directory } from '../Config';
 import LoadComponent from '../Components/Load';
 
-const RedirectHome = () => window.location.replace('/');
 
 const Routes = { 
   list: [],
-  router: null,
+  router: null
 };
 
 const Load = (config) => {
   const directory = Directory(config.dir);
 
-  let Result = {};
-  for (let filePath in directory.files) {
-    let parts = filePath
+  for (const filePath in directory.files) {
+    const parts = filePath
       .toLowerCase()
       .replace('../../../' + directory.path + '/', '')
       .split('.')[0]
       .split('/');
 
-    let last = parts.pop();
+    let current = Routes.list;
 
-    for (let p of parts) {
-      // console.log(p);
+    for (let i = 0; i < parts.length; i++) {
+      let path = parts[i];
+
+      if ([ 'main', 'index' ].includes(path)) path = '/';
+
+      let existing = current.find((r) => r.path === path);
+      if (!existing) {
+        existing = { path, children: [] };
+        current.push(existing);
+      }
+
+      current = existing.children;
+
+      if (i === parts.length - 1) {
+        if (existing.path === '/') {
+          delete existing.path;
+          delete existing.children;
+          existing.index = true;
+          existing.element = <LoadComponent element={ directory.files[filePath] } />;
+        } else {
+          existing.children.push({ index: true, element: <LoadComponent element={ directory.files[filePath] } /> });
+        }
+      }
+
     }
-
   }
 
-  console.log(Result)
+  const RedirectHome = () => window.location.replace(config.homePath);
+  Routes.list.push({ path: '*', element: <RedirectHome /> });
 
+  console.log(JSON.stringify(Routes.list));
 
-
-
-  // const directory = Directory(config.dir);
-  // const Result = [{ path: '*', element: <RedirectHome /> }];
-
-  // for (let f in directory.files) {
-  //   let path = f.toLowerCase().replace('../../../' + directory.path + '/', '').split('.')[0];
-  //   if (['main', 'index'].includes(path)) path = config.homePath;
-
-  //   if (path.split('/').pop() !== 'main') {
-  //     path = path.replace(new RegExp('^(' + config.removeFromPath?.join('|').toLocaleLowerCase() + ')/'), '');
-  //   }
-
-  //   if (['main', 'index'].includes(path.split('/').slice(-1)[0])) {
-  //     path = path.split('/').slice(0, -1).join('/');
-  //   }
-
-  //   if (Result.find((r) => r.key === path)) {
-  //     console.error(`[Routes]=> There is already another route with the path equal to "/${path}"`);
-  //     continue;
-  //   }
-
-  //   Routes.list.push({ path });
-  //   Result.push({ path, element: <LoadComponent element={directory.files[f]} /> });
-  // }
-
-  // Routes.router = createBrowserRouter(Result);
+  Routes.router = createBrowserRouter(Routes.list);
 };
 
 export {

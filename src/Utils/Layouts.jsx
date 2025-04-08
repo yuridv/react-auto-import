@@ -5,7 +5,7 @@ const Load = (config) => {
   const directory = Directory(config.dir);
 
   let Result = {};
-}
+};
 
 export {
   Load
