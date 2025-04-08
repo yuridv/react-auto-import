@@ -5,7 +5,7 @@ import config from '../defaultConfig.json'
 const Config = (newConfig = {}) => {
   Object.keys(newConfig).forEach((key) => config[key] = { ...config[key], ...newConfig[key] });
 
-  let layouts = config.Layouts || config.layouts;
+  // let layouts = config.Layouts || config.layouts;
   // if (layouts) Layouts(layouts);
 
   let routes = config.Routes || config.routes;

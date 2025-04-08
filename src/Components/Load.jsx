@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
+import PropTypes from 'prop-types';
 
 const Load = (props) => {
-  const [ Page, setPage ] = useState(false);
+  const [ Page, setPage ] = useState();
 
   useEffect(() => {
     (async () => {
-      let Element = (await props.element()).default;
-      let Style = {};
+      let element, style;
 
-      if (props.style) Style = await props.style();
-      if (!Style) console.warn('[Load]=> Style not found for element:', props.element);
+      if (props.element) element = await props.element();
+      if (props.style) style = await props.style();
 
-      setPage(<Element { ...props } style={ Style } />);
+      if (!style) console.warn('[Load]=> style not found for element:', props?.element);
+
+      if (element) return setPage(<element.default { ...props } style={ style } />);
+      setPage();
     })();
   }, [ props ]);
 
@@ -21,5 +24,10 @@ const Load = (props) => {
     </>
   )
 }
+
+Load.propTypes = {
+  element: PropTypes.func.isRequired,
+  style: PropTypes.func
+};
 
 export default Load;
