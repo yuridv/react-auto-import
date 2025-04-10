@@ -12,8 +12,6 @@ const Load = (config, layoutConfig) => {
   const { files } = Directory(config.dir);
   const { files: Layouts } = Directory(layoutConfig.dir);
 
-  console.log('[Layouts]=> ', JSON.stringify(Layouts, null, 2));
-
   const router = [];
 
   for (const route in files) {
@@ -36,8 +34,6 @@ const Load = (config, layoutConfig) => {
       ?.original;
     
     if (!layout) layout = Object.keys(Layouts).find(layout => layout === layoutConfig.default.toLowerCase());
-  
-    console.log(`[${path.join('/')}]=> `, layout);
 
     router.push({
       path: path.join('/'),
