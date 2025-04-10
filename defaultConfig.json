@@ -7,7 +7,7 @@
   },
   "Layouts": {
     "dir": "/src/layouts/",
-    "default": "src/layouts/default.jsx"
+    "default": "Default"
   },
   "Styles": {
     "dir": "/src/assets/css/"

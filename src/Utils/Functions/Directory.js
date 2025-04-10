@@ -11,8 +11,16 @@ const Directory = (directory) => {
   const filter = Object.keys(Files)
     .filter((r) => r.toLowerCase().startsWith('../../../' + path));
 
+
   const files = {};
-  for (const f of filter) files[f] = Files[f];
+  for (const file of filter) {
+    const name = file
+      .toLowerCase()
+      .replace('../../../' + path + '/', '')
+      .split('.')[0];
+
+    files[name] = Files[file];
+  }
 
   return { path, files };
 };

@@ -8,100 +8,53 @@ const Routes = {
   router: null
 };
 
-const Load = (config, layouts) => {
-  const { files, path } = Directory(config.dir);
-  const Layouts = Directory(layouts.dir);
-  console.log(Layouts);
+const Load = (config, layoutConfig) => {
+  const { files } = Directory(config.dir);
+  const { files: Layouts } = Directory(layoutConfig.dir);
 
-  for (const filePath in files) {
-    const parts = filePath
-      .toLowerCase()
-      .replace('../../../' + path + '/', '')
-      .split('.')[0]
+  console.log('[Layouts]=> ', JSON.stringify(Layouts, null, 2));
+
+  const router = [];
+
+  for (const route in files) {
+    const path = route
       .split('/');
     
-    const last = parts.pop();
-    let current = Routes.list;
+    if ([ 'main', 'index' ].includes(path[0])) path[0] = '/';
 
-    for (const part of parts) {
-      let existing = current.find((r) => r.path === part);
-      if (!existing) {
-        existing = { path: part, children: [] };
-        current.push(existing);
-      }
-      
-      current = existing.children;
-    }
+    if ([ 'main', 'index' ].includes(path.at(-1))) path.pop();
 
-    let element =  <LoadComponent element={ files[filePath] } /> /* 'ELEMENTO' */;
+    let layout = Object.keys(Layouts)
+      .map(pathname => ({
+        original: pathname,
+        parts: pathname
+          .split('/')
+          .filter(part => ![ 'main', 'index' ].includes(part))
+      }))
+      .sort((a, b) => b.parts.length - a.parts.length)
+      .find(pathname => pathname.parts.every((part, i) => part === path[i]))
+      ?.original;
+    
+    if (!layout) layout = Object.keys(Layouts).find(layout => layout === layoutConfig.default.toLowerCase());
+  
+    console.log(`[${path.join('/')}]=> `, layout);
 
-    if ([ 'main', 'index' ].includes(last)) {
-      current.push({ index: true, element: element });
-    } else {
-      current.push({ path: last, element: element });
-    }
+    router.push({
+      path: path.join('/'),
+      element: <LoadComponent element={ Layouts[layout] } />,
+      children: [ { index: true, element: <LoadComponent element={ files[route] } /> } ]
+    });
   }
 
-  Routes.router = createBrowserRouter(Routes.list);
+  // console.log('[Routes]=> ', JSON.stringify(router, null, 2));
 
-  // console.log('[Routes]=> ', JSON.stringify(Routes.list, null, 2));
+  const RedirectHome = () => window.location.replace(config.homePath);
+  router.push({ path: '*', element: <RedirectHome /> });
+
+  Routes.router = createBrowserRouter(router);
 };
 
 export {
   Load,
   Routes
 };
-
-
-
-
-// const Routes = { 
-//   list: [],
-//   router: null
-// };
-
-// const Load = (config) => {
-//   const directory = Directory(config.dir);
-
-//   for (const filePath in directory.files) {
-//     const parts = filePath
-//       .toLowerCase()
-//       .replace('../../../' + directory.path + '/', '')
-//       .split('.')[0]
-//       .split('/');
-
-//     let current = Routes.list;
-
-//     for (let i = 0; i < parts.length; i++) {
-//       let path = parts[i];
-
-//       if ([ 'main', 'index' ].includes(path)) path = '/';
-
-//       let existing = current.find((r) => r.path === path);
-//       if (!existing) {
-//         existing = { path, children: [] };
-//         current.push(existing);
-//       }
-
-//       current = existing.children;
-
-//       if (i === parts.length - 1) {
-//         if (existing.path === '/') {
-//           delete existing.path;
-//           delete existing.children;
-//           existing.index = true;
-//           existing.element = <LoadComponent element={ directory.files[filePath] } />;
-//         } else {
-//           existing.children.push({ index: true, element: <LoadComponent element={ directory.files[filePath] } /> });
-//         }
-//       }
-
-//     }
-//   }
-
-//   const RedirectHome = () => window.location.replace(config.homePath);
-
-//   Routes.list.push({ path: '*', element: <RedirectHome /> });
-
-//   Routes.router = createBrowserRouter(Routes.list);
-// };
