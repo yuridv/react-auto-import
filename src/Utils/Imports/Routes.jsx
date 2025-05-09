@@ -1,48 +1,70 @@
+import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
+
+import { Styles } from './';
 import { Directory } from '../Functions';
 
-import { Load as LoadComponent } from '../../Components';
-
-const Routes = {
-  list: []
-};
+let Routes;
 
 const Load = (config) => {
   const { files } = Directory(config.dir);
 
+  console.log('[Styles]=> ', Styles.list[0].element);
+
+
+  const RedirectHome = () => window.location.replace(config.homePath);
+
+  Routes = {
+    list: [],
+    router: [ { path: '*', element: <RedirectHome /> } ]
+  };
+
   for (const file in files) {
-    let path = file
+    const path = file
       .split('/')
       .filter(p => !config.removeFromPath.includes(p) && !/^\(.*\)$/.test(p));
 
     if ([ 'main', 'index' ].includes(path.at(-1))) path.pop();
-    if (!path.length) path[0] = config.homePath;
+    if (!path.length) path[0] = '/';
 
-    if (Routes.list.find(route => route.path === path.join('/'))) {
+    if (Routes.router.find(route => route.path === path.join('/'))) {
       console.error(`[DUPLICATE ROUTE]=> There is already another route with the path equal to "${path.join('/')}" for the file "${file}"`);
       continue;
     }
+
+    const Page = lazy(() => files[file]());
 
     path.reduce((curr, seg, i) => {
       const r = curr.find(p => p.path === seg) || curr[curr.push({ path: seg }) - 1];
 
       if (i === path.length - 1) {
-        r.element = <LoadComponent element={ files[file] } />;
+        r.element = <Page />;
       } else {
         r.children ??= [];
       }
 
       return r.children || [];
     }, Routes.list);
+
+
+    Routes.router.push({
+      path: path.join('/'),
+      element: null, // LAYOUT
+      children: [ { index: true, element: <Page style={ Styles.list[0].element }/> } ]
+    });
   }
 
-  const RedirectHome = () => window.location.replace(config.homePath);
-  Routes.list.push({ path: '*', element: <RedirectHome /> });
+  Routes.router = createBrowserRouter(Routes.router);
 
-  console.log('1', Routes.list);
-  Routes.router = createBrowserRouter(Routes.list);
+  console.log(Routes);
 };
 
+export {
+  Load,
+  Routes
+};
+
+/* 
 const LoadBK = (config, layoutConfig, styleConfig) => {
   const { files } = Directory(config.dir);
   const { files: Layouts } = Directory(layoutConfig.dir);
@@ -93,8 +115,4 @@ const LoadBK = (config, layoutConfig, styleConfig) => {
 
   Routes.router = createBrowserRouter(router);
 };
-
-export {
-  Load,
-  Routes
-};
+ */

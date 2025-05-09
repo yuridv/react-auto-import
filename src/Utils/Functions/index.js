@@ -1,7 +1,7 @@
 import Directory from './Directory';
-import ObjectAssing from './ObjectAssing';
+import ObjectAssign from './ObjectAssign';
 
 export {
   Directory,
-  ObjectAssing
+  ObjectAssign
 };

@@ -1,11 +1,12 @@
 import defaultConfig from '../defaultConfig.json';
-import { ObjectAssing } from './Utils/Functions';
+import { ObjectAssign } from './Utils/Functions';
 import { Load } from './Utils/Imports';
 
 const Config = (newConfig = {}) => {
-  const config = ObjectAssing(defaultConfig, newConfig);
+  const config = ObjectAssign(defaultConfig, newConfig);
 
-  Load.Routes(config.routes, config.layouts);
+  Load.Styles(config.styles);
+  Load.Routes(config.routes);
 };
 
 export {
