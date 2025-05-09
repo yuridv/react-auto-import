@@ -14,7 +14,7 @@
   },
   "plugins": ["react", "react-hooks"],
   "rules": {
-    "semi": ["error", "always"], // força a colocar ; no final das linhas
+    "semi": ["warn", "always"], // força a colocar ; no final das linhas
     "eqeqeq": ["error", "always"], // força uso de === ao invés de ==
     "no-unused-vars": "warn", // avisa sobre variáveis não usadas
     "no-var": "error", // proíbe var (use let/const)
@@ -27,7 +27,7 @@
     "space-before-function-paren": ["error", "never"], // não deixa espaço entre `function` e parênteses
     "arrow-spacing": ["error", { "before": true, "after": true }], // força espaços antes e depois da seta =>
     "max-lines": ["warn", 300], // avisa se o arquivo tiver mais de X linhas
-    "complexity": ["warn", 6], // mede complexidade de funções
+    "complexity": ["warn", 15], // mede complexidade de funções
     "max-depth": ["warn", 4], // limita aninhamento (ifs dentro de ifs, etc)
     "max-params": ["warn", 4], // sugere dividir funções com muitos parâmetros
     "no-nested-ternary": "warn", // desincentiva ternários aninhados (? dentro de ? (var ? "" : var2) : "")

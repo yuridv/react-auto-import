@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 const Load = (props) => {
   const [ Page, setPage ] = useState();
 
   useEffect(() => {
-    (async () => {
+    (async() => {
       let element, style;
 
       if (props.element) element = await props.element();
@@ -22,8 +22,8 @@ const Load = (props) => {
     <>
       { Page ? Page : (<a>CARREGANDO...</a>) }
     </>
-  )
-}
+  );
+};
 
 Load.propTypes = {
   element: PropTypes.func.isRequired,

@@ -1,5 +1,5 @@
-import { Config } from './src/Config'
-import { Routes } from './src/Utils'
+import { Config } from './src/Config';
+import { Routes } from './src/Utils/Imports';
 
 export {
   Config,
