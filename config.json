@@ -1,0 +1,15 @@
+{
+  "routes": {
+    "dir": "/src/routes",
+    "homePath": "/",
+    "errorPage": "",
+    "removeFromPath": [ "public", "private" ]
+  },
+  "layouts": {
+    "dir": "/src/layouts/",
+    "default": "main"
+  },
+  "styles": {
+    "dir": "/src/assets/css/"
+  }
+}
