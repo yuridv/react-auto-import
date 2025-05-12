@@ -21,17 +21,20 @@ const Directory = (directory) => {
   }
 
   files = Object.fromEntries(
-    Object.entries(files).sort((a, b) => {
-      const depthA = a[0].split('/').length;
-      const depthB = b[0].split('/').length;
-  
-      if (depthA !== depthB) return depthA - depthB;
-  
-      const endsWithMainA = a[0].toLowerCase().endsWith('main');
-      const endsWithMainB = b[0].toLowerCase().endsWith('main');
-  
-      return (endsWithMainB ? 1 : 0) - (endsWithMainA ? 1 : 0);
-    })
+    Object.entries(files)
+      .sort((a, b) => {
+        const depthA = a[0].split('/').length;
+        const depthB = b[0].split('/').length;
+    
+        // Ordena pelo que tem menos barras (/)
+        if (depthA !== depthB) return depthA - depthB;
+    
+        // Prioriza os que terminal com main
+        const endsWithMainA = a[0].toLowerCase().endsWith('main');
+        const endsWithMainB = b[0].toLowerCase().endsWith('main');
+    
+        return (endsWithMainB ? 1 : 0) - (endsWithMainA ? 1 : 0);
+      })
   );
 
   return { path, files };

@@ -7,6 +7,7 @@ const Config = (newConfig = {}) => {
   const config = ObjectAssign(defaultConfig, newConfig);
 
   load.Routes(config.routes);
+  load.Styles(config.styles);
 };
 
 export {

@@ -1,9 +1,9 @@
 {
+  "router": {
+    "homePath": "/"
+  },
   "routes": {
-    "dir": "/src/routes",
-    "homePath": "/",
-    "errorPage": "",
-    "removeFromPath": [ "public", "private" ]
+    "dir": "/src/routes"
   },
   "layouts": {
     "dir": "/src/layouts/",

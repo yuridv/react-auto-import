@@ -10,7 +10,7 @@ const Load = (config) => {
   for (const file in files) {
     const path = file
       .split('/')
-      .filter(p => !config.removeFromPath.includes(p) && !/^\(.*\)$/.test(p));
+      .filter(p => !/^\(.*\)$/.test(p));
       
     if ([ 'main', 'index' ].includes(path.at(-1))) path.pop();
     if (!path.length) path[0] = '/';
@@ -33,8 +33,6 @@ const Load = (config) => {
       return r.children || [];
     }, Routes);
   }
-
-  console.log(Routes);
 };
 
 export {
