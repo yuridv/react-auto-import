@@ -20,7 +20,7 @@
     "no-var": "error", // proíbe var (use let/const)
     "prefer-const": "warn", // sugere const quando variável não muda
     "quotes": ["error", "single"], // força uso de aspas simples
-    "indent": ["error", 2], // força indentação de 2 espaços
+    "indent": ["error", 2], // força 2 espaços de margem
     "comma-dangle": ["error", "never"], // proíbe vírgula no final de objetos/arrays multilinhas
     "object-curly-spacing": ["error", "always"], // espaçamento entre { chaves }
     "array-bracket-spacing": ["error", "always"], // força espaços dentro de [ colchetes ]

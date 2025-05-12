@@ -6,15 +6,14 @@ const Load = (config) => {
   const { files } = Directory(config.dir);
   Styles = {};
     
-  for (let file in files) {
-    let path = file
+  for (const file in files) {
+    const path = file
       .split('/')
       .filter(p => !/^\(.*\)$/.test(p));
+    const last = path.pop();
 
-    let last = path.pop();
     let pointer = Styles;
-
-    for (let p of path) {
+    for (const p of path) {
       pointer[p] = pointer[p] || {};
       pointer = pointer[p];
     }
