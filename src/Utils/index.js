@@ -1,13 +1,16 @@
 import { Routes, Load as loadRoutes } from './Routes';
-import { Styles, Load as loadStyles } from './Styles';
+import { Layouts, Load as loadLayouts } from './Layouts';
+import { Router, Load as loadRouter } from './Router';
 
 const load = {
   Routes: loadRoutes,
-  Styles: loadStyles
+  Layouts: loadLayouts,
+  Router: loadRouter
 };
 
 export {
   load,
   Routes,
-  Styles
+  Layouts,
+  Router
 };

@@ -1,8 +1,9 @@
 import { Config } from './src/Config';
-import { Routes, Styles } from './src/Utils';
+import { Routes, Layouts, Router } from './src/Utils';
 
 export {
   Config,
   Routes,
-  Styles
+  Layouts,
+  Router
 };

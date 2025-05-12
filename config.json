@@ -1,15 +1,17 @@
 {
+  "logs": {
+    "disableWarnings": false
+  },
   "router": {
     "homePath": "/"
   },
   "routes": {
-    "dir": "/src/routes"
+    "dir": "/src/routes",
+    "styles": "/src/assets/css/routes"
   },
   "layouts": {
     "dir": "/src/layouts/",
+    "styles": "/src/assets/css/layouts",
     "default": "main"
-  },
-  "styles": {
-    "dir": "/src/assets/css/"
   }
 }

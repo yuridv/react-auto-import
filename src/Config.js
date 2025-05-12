@@ -6,8 +6,9 @@ import { load } from './Utils';
 const Config = (newConfig = {}) => {
   const config = ObjectAssign(defaultConfig, newConfig);
 
-  load.Routes(config.routes);
-  load.Styles(config.styles);
+  load.Routes(config);
+  load.Layouts(config);
+  load.Router(config);
 };
 
 export {

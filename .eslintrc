@@ -4,7 +4,7 @@
     "es2021": true,
     "node": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [ "eslint:recommended", "plugin:react/recommended" ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -12,24 +12,24 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["react", "react-hooks"],
+  "plugins": [ "react", "react-hooks" ],
   "rules": {
-    "semi": ["warn", "always"], // força a colocar ; no final das linhas
-    "eqeqeq": ["error", "always"], // força uso de === ao invés de ==
+    "semi": [ "warn", "always" ], // força a colocar ; no final das linhas
+    "eqeqeq": [ "error", "always" ], // força uso de === ao invés de ==
     "no-unused-vars": "warn", // avisa sobre variáveis não usadas
     "no-var": "error", // proíbe var (use let/const)
     "prefer-const": "warn", // sugere const quando variável não muda
-    "quotes": ["error", "single"], // força uso de aspas simples
-    "indent": ["error", 2], // força 2 espaços de margem
-    "comma-dangle": ["error", "never"], // proíbe vírgula no final de objetos/arrays multilinhas
-    "object-curly-spacing": ["error", "always"], // espaçamento entre { chaves }
-    "array-bracket-spacing": ["error", "always"], // força espaços dentro de [ colchetes ]
-    "space-before-function-paren": ["error", "never"], // não deixa espaço entre `function` e parênteses
-    "arrow-spacing": ["error", { "before": true, "after": true }], // força espaços antes e depois da seta =>
-    "max-lines": ["warn", 300], // avisa se o arquivo tiver mais de X linhas
-    "complexity": ["warn", 15], // mede complexidade de funções
-    "max-depth": ["warn", 4], // limita aninhamento (ifs dentro de ifs, etc)
-    "max-params": ["warn", 4], // sugere dividir funções com muitos parâmetros
+    "quotes": [ "error", "single" ], // força uso de aspas simples
+    "indent": [ "error", 2], // força 2 espaços de margem
+    "comma-dangle": [ "error", "never" ], // proíbe vírgula no final de objetos/arrays multilinhas
+    "object-curly-spacing": [ "error", "always" ], // espaçamento entre { chaves }
+    "array-bracket-spacing": [ "error", "always" ], // força espaços dentro de [ colchetes ]
+    "space-before-function-paren": [ "error", "never" ], // não deixa espaço entre `function` e parênteses
+    "arrow-spacing": [ "error", { "before": true, "after": true }], // força espaços antes e depois da seta =>
+    "max-lines": [ "warn", 300], // avisa se o arquivo tiver mais de X linhas
+    "complexity": [ "warn", 15], // mede complexidade de funções
+    "max-depth": [ "warn", 4], // limita aninhamento (ifs dentro de ifs, etc)
+    "max-params": [ "warn", 4], // sugere dividir funções com muitos parâmetros
     "no-nested-ternary": "warn", // desincentiva ternários aninhados (? dentro de ? (var ? "" : var2) : "")
     "no-shadow": "warn", // evita declarar variáveis com o mesmo nome de escopos externos
     "react/jsx-uses-react": "off", // se estiver usando React 17+
